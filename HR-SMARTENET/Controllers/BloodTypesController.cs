@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using HR_SMARTENET.Data;
 using HR_SMARTENET.Models.EmploeeDetails;
@@ -23,16 +18,16 @@ namespace HR_SMARTENET.Controllers
 
         // GET: api/BloodTypes
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<BloodType>>> GetGenders()
+        public async Task<ActionResult<IEnumerable<BloodType>>> GetbloodTypes()
         {
-            return await _context.bloodTypes.ToListAsync();
+            return await _context.BloodTypes.ToListAsync();
         }
 
         // GET: api/BloodTypes/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<BloodType>> GetBloodType(Guid id)
+        public async Task<ActionResult<BloodType>> GetBloodType(int id)
         {
-            var bloodType = await _context.bloodTypes.FindAsync(id);
+            var bloodType = await _context.BloodTypes.FindAsync(id);
 
             if (bloodType == null)
             {
@@ -45,7 +40,7 @@ namespace HR_SMARTENET.Controllers
         // PUT: api/BloodTypes/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutBloodType(Guid id, BloodType bloodType)
+        public async Task<IActionResult> PutBloodType(int id, BloodType bloodType)
         {
             if (id != bloodType.Id)
             {
@@ -78,7 +73,7 @@ namespace HR_SMARTENET.Controllers
         [HttpPost]
         public async Task<ActionResult<BloodType>> PostBloodType(BloodType bloodType)
         {
-            _context.bloodTypes.Add(bloodType);
+            _context.BloodTypes.Add(bloodType);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetBloodType", new { id = bloodType.Id }, bloodType);
@@ -86,23 +81,23 @@ namespace HR_SMARTENET.Controllers
 
         // DELETE: api/BloodTypes/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteBloodType(Guid id)
+        public async Task<IActionResult> DeleteBloodType(int id)
         {
-            var bloodType = await _context.bloodTypes.FindAsync(id);
+            var bloodType = await _context.BloodTypes.FindAsync(id);
             if (bloodType == null)
             {
                 return NotFound();
             }
 
-            _context.bloodTypes.Remove(bloodType);
+            _context.BloodTypes.Remove(bloodType);
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        private bool BloodTypeExists(Guid id)
+        private bool BloodTypeExists(int id)
         {
-            return _context.bloodTypes.Any(e => e.Id == id);
+            return _context.BloodTypes.Any(e => e.Id == id);
         }
     }
 }
