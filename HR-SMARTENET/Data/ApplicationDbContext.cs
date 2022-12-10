@@ -9,6 +9,6 @@ namespace HR_SMARTENET.Data
         {
         }
 
-        public DbSet<Gender> Genders { get; set; }
+        public DbSet<BloodType> bloodTypes { get; set; }
     }
 }
